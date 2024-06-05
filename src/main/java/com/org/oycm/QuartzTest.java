@@ -24,7 +24,7 @@ public class QuartzTest {
 
             // 定义触发器 5s执行一次 重复执行
             Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger", "group2").startNow()
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
+                    .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())
                     .build();
 
             // 使用触发器来执行job
