@@ -4,8 +4,6 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
-import static org.quartz.TriggerBuilder.newTrigger;
 
 
 /**
@@ -24,7 +22,7 @@ public class QuartzTest {
             // 定义job
             JobDetail job = newJob(HelloJob.class).withIdentity("job1", "group1").build();
 
-            // 定义触发器
+            // 定义触发器 5s执行一次 重复执行
             Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger", "group2").startNow()
                     .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
                     .build();
