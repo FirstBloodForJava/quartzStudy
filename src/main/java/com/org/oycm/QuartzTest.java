@@ -14,7 +14,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
  */
 public class QuartzTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         try {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 
@@ -25,12 +25,14 @@ public class QuartzTest {
             JobDetail job = newJob(HelloJob.class).withIdentity("job1", "group1").build();
 
             // 定义触发器
-            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger", "group1").startNow()
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(40).repeatForever())
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger", "group2").startNow()
+                    .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
                     .build();
 
             // 使用触发器来执行job
             scheduler.scheduleJob(job, trigger);
+
+            Thread.sleep(60000);
 
             scheduler.shutdown();
         } catch (SchedulerException e) {
